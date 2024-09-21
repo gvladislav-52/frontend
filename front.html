@@ -4,13 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Отправка данных</title>
+    <script>
+        // Function to fetch the data from the backend and display it
+        function fetchData() {
+            fetch('/fetch_data')
+            .then(response => response.json())
+            .then(data => {
+                // Display the file contents in the resultDiv
+                document.getElementById('resultDiv').textContent = data.content;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </head>
 <body>
     <h1>Отправить данные</h1>
+    
+    <!-- Form to submit data -->
     <form action="http://localhost:5000/submit" method="POST">
         <label for="text">Введите текст:</label><br>
         <input type="text" id="text" name="text" required><br><br>
         <button type="submit">Отправить</button>
     </form>
+
+    <h1>Получить данные</h1>
+    
+    <!-- Button to fetch and display data -->
+    <button onclick="fetchData()">Получить данные</button>
+    
+    <!-- Div to display the result of fetched data -->
+    <div id="resultDiv" style="margin-top: 20px; padding: 10px; border: 1px solid #000;"></div>
+    
 </body>
 </html>
